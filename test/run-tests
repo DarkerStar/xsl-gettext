@@ -1,0 +1,208 @@
+#!/bin/sh
+
+error()
+{
+	status=${?}
+	[ "x${status}" = "x0" ] && status=1
+	echo "[ERROR]: ${*}" >&2
+	exit ${status}
+}
+
+# Generate the plain text test output
+{
+	# Most basic - simple string, default language, no plural forms
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain get-string.xsl - && echo || error 'test 1'
+	
+	# Simple string, non-default languages, no plural forms
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang en get-string.xsl - && echo || error 'test 2'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang en-CA get-string.xsl - && echo || error 'test 3'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang fr get-string.xsl - && echo || error 'test 4'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang fr-CA get-string.xsl - && echo || error 'test 5'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang de get-string.xsl - && echo || error 'test 6'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang fred get-string.xsl - && echo || error 'test 7'
+	
+	# Simple string, default language, plural forms (should have no effect)
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam n 0 get-string.xsl - && echo || error 'test 8'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam n 1 get-string.xsl - && echo || error 'test 9'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam n 2 get-string.xsl - && echo || error 'test 10'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam n 69 get-string.xsl - && echo || error 'test 11'
+	
+	# Simple string, non-default languages, plural forms (should have no effect)
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang en --stringparam n 0 get-string.xsl - && echo || error 'test 12'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang en --stringparam n 1 get-string.xsl - && echo || error 'test 13'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang en --stringparam n 2 get-string.xsl - && echo || error 'test 14'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang en --stringparam n 69 get-string.xsl - && echo || error 'test 15'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang en-CA --stringparam n 0 get-string.xsl - && echo || error 'test 16'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang en-CA --stringparam n 1 get-string.xsl - && echo || error 'test 17'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang en-CA --stringparam n 2 get-string.xsl - && echo || error 'test 18'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang en-CA --stringparam n 69 get-string.xsl - && echo || error 'test 19'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang fr --stringparam n 0 get-string.xsl - && echo || error 'test 20'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang fr --stringparam n 1 get-string.xsl - && echo || error 'test 21'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang fr --stringparam n 2 get-string.xsl - && echo || error 'test 22'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang fr --stringparam n 69 get-string.xsl - && echo || error 'test 23'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang fr-CA --stringparam n 0 get-string.xsl - && echo || error 'test 24'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang fr-CA --stringparam n 1 get-string.xsl - && echo || error 'test 25'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang fr-CA --stringparam n 2 get-string.xsl - && echo || error 'test 26'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang fr-CA --stringparam n 69 get-string.xsl - && echo || error 'test 27'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang de --stringparam n 0 get-string.xsl - && echo || error 'test 28'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang de --stringparam n 1 get-string.xsl - && echo || error 'test 29'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang de --stringparam n 2 get-string.xsl - && echo || error 'test 30'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang de --stringparam n 69 get-string.xsl - && echo || error 'test 31'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang fred --stringparam n 0 get-string.xsl - && echo || error 'test 32'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang fred --stringparam n 1 get-string.xsl - && echo || error 'test 33'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang fred --stringparam n 2 get-string.xsl - && echo || error 'test 34'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id plain --stringparam lang fred --stringparam n 69 get-string.xsl - && echo || error 'test 35'
+	
+	# HTML string, default language, no plural forms
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html get-string.xsl - && echo || error 'test 36'
+	
+	# HTML string, non-default languages, no plural forms
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang en get-string.xsl - && echo || error 'test 37'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang en-CA get-string.xsl - && echo || error 'test 38'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang fr get-string.xsl - && echo || error 'test 39'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang fr-CA get-string.xsl - && echo || error 'test 40'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang de get-string.xsl - && echo || error 'test 41'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang fred get-string.xsl - && echo || error 'test 42'
+	
+	# HTML string, default language, plural forms (should have no effect)
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam n 0 get-string.xsl - && echo || error 'test 43'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam n 1 get-string.xsl - && echo || error 'test 44'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam n 2 get-string.xsl - && echo || error 'test 45'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam n 69 get-string.xsl - && echo || error 'test 46'
+	
+	# HTML string, non-default languages, plural forms (should have no effect)
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang en --stringparam n 0 get-string.xsl - && echo || error 'test 47'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang en --stringparam n 1 get-string.xsl - && echo || error 'test 48'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang en --stringparam n 2 get-string.xsl - && echo || error 'test 49'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang en --stringparam n 69 get-string.xsl - && echo || error 'test 50'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang en-CA --stringparam n 0 get-string.xsl - && echo || error 'test 51'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang en-CA --stringparam n 1 get-string.xsl - && echo || error 'test 52'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang en-CA --stringparam n 2 get-string.xsl - && echo || error 'test 53'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang en-CA --stringparam n 69 get-string.xsl - && echo || error 'test 54'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang fr --stringparam n 0 get-string.xsl - && echo || error 'test 55'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang fr --stringparam n 1 get-string.xsl - && echo || error 'test 56'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang fr --stringparam n 2 get-string.xsl - && echo || error 'test 57'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang fr --stringparam n 69 get-string.xsl - && echo || error 'test 58'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang fr-CA --stringparam n 0 get-string.xsl - && echo || error 'test 59'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang fr-CA --stringparam n 1 get-string.xsl - && echo || error 'test 60'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang fr-CA --stringparam n 2 get-string.xsl - && echo || error 'test 61'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang fr-CA --stringparam n 69 get-string.xsl - && echo || error 'test 62'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang de --stringparam n 0 get-string.xsl - && echo || error 'test 63'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang de --stringparam n 1 get-string.xsl - && echo || error 'test 64'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang de --stringparam n 2 get-string.xsl - && echo || error 'test 65'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang de --stringparam n 69 get-string.xsl - && echo || error 'test 66'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang fred --stringparam n 0 get-string.xsl - && echo || error 'test 67'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang fred --stringparam n 1 get-string.xsl - && echo || error 'test 68'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang fred --stringparam n 2 get-string.xsl - && echo || error 'test 69'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id html --stringparam lang fred --stringparam n 69 get-string.xsl - && echo || error 'test 70'
+	
+	# Simple string, default language, no plural forms (should matter)
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain get-string.xsl - && echo || error 'test 71'
+	
+	# Simple string, non-default languages, no plural forms (should matter)
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang en get-string.xsl - && echo || error 'test 72'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang en-CA get-string.xsl - && echo || error 'test 73'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang fr get-string.xsl - && echo || error 'test 74'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang fr-CA get-string.xsl - && echo || error 'test 75'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang de get-string.xsl - && echo || error 'test 76'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang fred get-string.xsl - && echo || error 'test 77'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang pl get-string.xsl - && echo || error 'test 78'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang ja get-string.xsl - && echo || error 'test 79'
+	
+	# Simple string, default language, plural forms
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam n 0 get-string.xsl - && echo || error 'test 80'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam n 1 get-string.xsl - && echo || error 'test 81'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam n 2 get-string.xsl - && echo || error 'test 82'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam n 69 get-string.xsl - && echo || error 'test 83'
+	
+	# Simple string, non-default languages, plural forms
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang en --stringparam n 0 get-string.xsl - && echo || error 'test 84'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang en --stringparam n 1 get-string.xsl - && echo || error 'test 85'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang en --stringparam n 2 get-string.xsl - && echo || error 'test 86'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang en --stringparam n 69 get-string.xsl - && echo || error 'test 87'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang en-CA --stringparam n 0 get-string.xsl - && echo || error 'test 88'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang en-CA --stringparam n 1 get-string.xsl - && echo || error 'test 89'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang en-CA --stringparam n 2 get-string.xsl - && echo || error 'test 90'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang en-CA --stringparam n 69 get-string.xsl - && echo || error 'test 91'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang fr --stringparam n 0 get-string.xsl - && echo || error 'test 92'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang fr --stringparam n 1 get-string.xsl - && echo || error 'test 93'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang fr --stringparam n 2 get-string.xsl - && echo || error 'test 94'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang fr --stringparam n 69 get-string.xsl - && echo || error 'test 95'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang fr-CA --stringparam n 0 get-string.xsl - && echo || error 'test 96'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang fr-CA --stringparam n 1 get-string.xsl - && echo || error 'test 97'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang fr-CA --stringparam n 2 get-string.xsl - && echo || error 'test 98'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang fr-CA --stringparam n 69 get-string.xsl - && echo || error 'test 99'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang de --stringparam n 0 get-string.xsl - && echo || error 'test 100'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang de --stringparam n 1 get-string.xsl - && echo || error 'test 101'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang de --stringparam n 2 get-string.xsl - && echo || error 'test 102'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang de --stringparam n 69 get-string.xsl - && echo || error 'test 103'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang fred --stringparam n 0 get-string.xsl - && echo || error 'test 104'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang fred --stringparam n 1 get-string.xsl - && echo || error 'test 105'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang fred --stringparam n 2 get-string.xsl - && echo || error 'test 106'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang fred --stringparam n 69 get-string.xsl - && echo || error 'test 107'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang pl --stringparam n 0 get-string.xsl - && echo || error 'test 108'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang pl --stringparam n 1 get-string.xsl - && echo || error 'test 109'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang pl --stringparam n 2 get-string.xsl - && echo || error 'test 110'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang pl --stringparam n 69 get-string.xsl - && echo || error 'test 111'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang ja --stringparam n 0 get-string.xsl - && echo || error 'test 112'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang ja --stringparam n 1 get-string.xsl - && echo || error 'test 113'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang ja --stringparam n 2 get-string.xsl - && echo || error 'test 114'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-plain --stringparam lang ja --stringparam n 69 get-string.xsl - && echo || error 'test 115'
+	
+	
+	
+	# HTML string, default language, no plural forms (should matter)
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html get-string.xsl - && echo || error 'test 116'
+	
+	# HTML string, non-default languages, no plural forms (should matter)
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang en get-string.xsl - && echo || error 'test 117'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang en-CA get-string.xsl - && echo || error 'test 118'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang fr get-string.xsl - && echo || error 'test 119'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang fr-CA get-string.xsl - && echo || error 'test 120'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang de get-string.xsl - && echo || error 'test 121'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang fred get-string.xsl - && echo || error 'test 122'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang pl get-string.xsl - && echo || error 'test 123'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang ja get-string.xsl - && echo || error 'test 124'
+	
+	# HTML string, default language, plural forms
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam n 0 get-string.xsl - && echo || error 'test 125'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam n 1 get-string.xsl - && echo || error 'test 126'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam n 2 get-string.xsl - && echo || error 'test 127'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam n 69 get-string.xsl - && echo || error 'test 128'
+	
+	# HTML string, non-default languages, plural forms
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang en --stringparam n 0 get-string.xsl - && echo || error 'test 129'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang en --stringparam n 1 get-string.xsl - && echo || error 'test 130'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang en --stringparam n 2 get-string.xsl - && echo || error 'test 131'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang en --stringparam n 69 get-string.xsl - && echo || error 'test 132'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang en-CA --stringparam n 0 get-string.xsl - && echo || error 'test 133'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang en-CA --stringparam n 1 get-string.xsl - && echo || error 'test 134'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang en-CA --stringparam n 2 get-string.xsl - && echo || error 'test 135'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang en-CA --stringparam n 69 get-string.xsl - && echo || error 'test 136'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang fr --stringparam n 0 get-string.xsl - && echo || error 'test 137'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang fr --stringparam n 1 get-string.xsl - && echo || error 'test 138'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang fr --stringparam n 2 get-string.xsl - && echo || error 'test 139'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang fr --stringparam n 69 get-string.xsl - && echo || error 'test 140'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang fr-CA --stringparam n 0 get-string.xsl - && echo || error 'test 141'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang fr-CA --stringparam n 1 get-string.xsl - && echo || error 'test 142'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang fr-CA --stringparam n 2 get-string.xsl - && echo || error 'test 143'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang fr-CA --stringparam n 69 get-string.xsl - && echo || error 'test 144'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang de --stringparam n 0 get-string.xsl - && echo || error 'test 145'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang de --stringparam n 1 get-string.xsl - && echo || error 'test 146'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang de --stringparam n 2 get-string.xsl - && echo || error 'test 147'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang de --stringparam n 69 get-string.xsl - && echo || error 'test 148'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang fred --stringparam n 0 get-string.xsl - && echo || error 'test 149'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang fred --stringparam n 1 get-string.xsl - && echo || error 'test 150'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang fred --stringparam n 2 get-string.xsl - && echo || error 'test 151'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang fred --stringparam n 69 get-string.xsl - && echo || error 'test 152'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang pl --stringparam n 0 get-string.xsl - && echo || error 'test 153'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang pl --stringparam n 1 get-string.xsl - && echo || error 'test 154'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang pl --stringparam n 2 get-string.xsl - && echo || error 'test 155'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang pl --stringparam n 69 get-string.xsl - && echo || error 'test 156'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang ja --stringparam n 0 get-string.xsl - && echo || error 'test 157'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang ja --stringparam n 1 get-string.xsl - && echo || error 'test 158'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang ja --stringparam n 2 get-string.xsl - && echo || error 'test 159'
+	echo '<dummy/>' | xsltproc --nonet --stringparam id num-html --stringparam lang ja --stringparam n 69 get-string.xsl - && echo || error 'test 160'
+} >test-output
+
+diff test-output expected || error 'output does not match expected'

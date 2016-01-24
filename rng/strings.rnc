@@ -1,0 +1,23 @@
+default namespace = "https://genesismachina.ca/xmlns/strings"
+
+start =
+  element strings {
+    element plural-forms {
+      element form { text }*,
+      attribute xml:lang { xsd:language }
+    }*,
+    element string {
+      element s {
+        (text | anyElement)*,
+        attribute xml:lang { xsd:language }?,
+        attribute n { xsd:unsignedByte }?
+      }*,
+      attribute xml:id { xsd:ID }
+    }*
+  }
+anyElement =
+  element * {
+    (attribute * { text }
+     | text
+     | anyElement)*
+  }

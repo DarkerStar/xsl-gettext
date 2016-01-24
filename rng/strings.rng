@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <start>
+    <element name="strings" ns="https://genesismachina.ca/xmlns/strings">
+      <zeroOrMore>
+        <element name="plural-forms">
+          <zeroOrMore>
+            <element name="form">
+              <text/>
+            </element>
+          </zeroOrMore>
+          <attribute name="xml:lang">
+            <data type="language"/>
+          </attribute>
+        </element>
+      </zeroOrMore>
+      <zeroOrMore>
+        <element name="string">
+          <zeroOrMore>
+            <element name="s">
+              <zeroOrMore>
+                <choice>
+                  <text/>
+                  <ref name="anyElement"/>
+                </choice>
+              </zeroOrMore>
+              <optional>
+                <attribute name="xml:lang">
+                  <data type="language"/>
+                </attribute>
+              </optional>
+              <optional>
+                <attribute name="n">
+                  <data type="unsignedByte"/>
+                </attribute>
+              </optional>
+            </element>
+          </zeroOrMore>
+          <attribute name="xml:id">
+            <data type="ID"/>
+          </attribute>
+        </element>
+      </zeroOrMore>
+    </element>
+  </start>
+  <define name="anyElement">
+    <element>
+      <anyName/>
+      <zeroOrMore>
+        <choice>
+          <attribute>
+            <anyName/>
+          </attribute>
+          <text/>
+          <ref name="anyElement"/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+</grammar>

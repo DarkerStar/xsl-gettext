@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<strings xmlns="https://genesismachina.ca/xmlns/strings">
+  <plural-forms xml:lang="fr">
+    <form><![CDATA[ $n > 1 ]]></form>
+  </plural-forms>
+  <plural-forms xml:lang="ja"/>
+  <plural-forms xml:lang="pl">
+    <form><![CDATA[ (($n mod 10) >= 2) and (($n mod 10) <=4) and ((($n mod 100) < 10) or (($n mod 100) >= 20)) ]]></form>
+    <form><![CDATA[ $n != 1 ]]></form>
+  </plural-forms>
+  <string xml:id="plain">
+    <s>plain default</s>
+    <s xml:lang="en-CA">plain en-CA</s>
+    <s xml:lang="fr">plain fr</s>
+  </string>
+  <string xml:id="html">
+    <s>html <i xmlns="http://www.w3.org/1999/xhtml" class="lang">default</i> content</s>
+    <s xml:lang="en-CA">html <i xmlns="http://www.w3.org/1999/xhtml" class="lang">en-CA</i> content</s>
+    <s xml:lang="fr">html <i xmlns="http://www.w3.org/1999/xhtml" class="lang">fr</i> content</s>
+  </string>
+  <string xml:id="num-plain">
+    <s n="0">default: One file</s>
+    <s n="1">default: Zero or more than one files</s>
+    <s xml:lang="eo" n="0">eo: Unu dosiero</s>
+    <s xml:lang="eo" n="1">eo: Nul aŭ pli ol unu dosieroj</s>
+    <s xml:lang="fr" n="0">fr: Zéro ou un fichier</s>
+    <s xml:lang="fr" n="1">fr: Plus d’un fichiers</s>
+    <s xml:lang="ja" n="0">ja: ファイルがあります</s>
+    <s xml:lang="pl" n="0">pl: Jeden plik</s>
+    <s xml:lang="pl" n="1">pl: Dwa, trzy lub cztery pliki</s>
+    <s xml:lang="pl" n="2">pl: Zero, lub pięć lub więcej plików</s>
+  </string>
+  <string xml:id="num-html">
+    <s n="0"><span xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">default: <q><b title="Title">One</b> file.</q></span></s>
+    <s n="1"><span xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">default: <q><b title="Title">Zero or more than one</b> files.</q></span></s>
+    <s xml:lang="eo" n="0"><span xmlns="http://www.w3.org/1999/xhtml" lang="eo" xml:lang="eo">eo: <q><b title="Titolo">Unu</b> dosiero.</q></span></s>
+    <s xml:lang="eo" n="1"><span xmlns="http://www.w3.org/1999/xhtml" lang="eo" xml:lang="eo">eo: <q><b title="Titolo">Nul aŭ pli ol unu</b> dosieroj.</q></span></s>
+    <s xml:lang="fr" n="0"><span xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">fr: <q><b title="Titre">Zéro ou un</b> fichier.</q></span></s>
+    <s xml:lang="fr" n="1"><span xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">fr: <q><b title="Titre">Plus d’un</b> fichiers.</q></span></s>
+    <s xml:lang="ja" n="0"><span xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">ja: <q>ファイルが<b title="名称">あります</b>。</q></span></s>
+    <s xml:lang="pl" n="0"><span xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl">pl: <q><b title="Tytuł">Jeden</b> plik.</q></span></s>
+    <s xml:lang="pl" n="1"><span xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl">pl: <q><b title="Tytuł">Dwa, trzy lub cztery</b> pliki.</q></span></s>
+    <s xml:lang="pl" n="2"><span xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl">pl: <q><b title="Tytuł">Zero, lub pięć lub więcej</b> plików.</q></span></s>
+  </string>
+  <string xml:id="format-none">
+    <s>format-none default</s>
+    <s xml:lang="en-CA">format-none en-CA</s>
+    <s xml:lang="fr">format-none fr</s>
+  </string>
+  <string xml:id="format-none-html">
+    <s>format-none-html <i xmlns="http://www.w3.org/1999/xhtml" class="lang">default</i> content</s>
+    <s xml:lang="en-CA">format-none-html <i xmlns="http://www.w3.org/1999/xhtml" class="lang">en-CA</i> content</s>
+    <s xml:lang="fr">format-none-html <i xmlns="http://www.w3.org/1999/xhtml" class="lang">fr</i> content</s>
+  </string>
+  <string xml:id="format-plain">
+    <s>default: '${a}', '${b}', '${c}'</s>
+    <s xml:lang="en-CA">en-CA: '${a}', '${b}', '${c}'</s>
+    <s xml:lang="fr">fr: '${a}', '${b}', '${c}'</s>
+  </string>
+  <string xml:id="format-html">
+    <s><span xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">default: <q class="${b}">${a}</q>, <q class="${a}">${b}</q></span></s>
+    <s xml:lang="en-CA"><span xmlns="http://www.w3.org/1999/xhtml" lang="en-CA" xml:lang="en-CA">en-CA: <q class="${b}">${a}</q>, <q class="${a}">${b}</q></span></s>
+    <s xml:lang="fr"><span xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">fr: <q class="${b}">${a}</q>, <q class="${a}">${b}</q></span></s>
+  </string>
+  <string xml:id="format-num-plain">
+    <s n="0">default: ${files} file</s>
+    <s n="1">default: ${files} files</s>
+    <s xml:lang="eo" n="0">eo: ${files} dosiero</s>
+    <s xml:lang="eo" n="1">eo: ${files} dosieroj</s>
+    <s xml:lang="fr" n="0">fr: ${files} fichier</s>
+    <s xml:lang="fr" n="1">fr: ${files} fichiers</s>
+    <s xml:lang="ja" n="0">ja: ${files} ファイル</s>
+    <s xml:lang="pl" n="0">pl: ${files} plik</s>
+    <s xml:lang="pl" n="1">pl: ${files} pliki</s>
+    <s xml:lang="pl" n="2">pl: ${files} plików</s>
+  </string>
+  <string xml:id="format-num-html">
+    <s n="0"><span xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">default: <q><b title="${title}">${files}</b> file.</q></span></s>
+    <s n="1"><span xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">default: <q><b title="${title}">${files}</b> files.</q></span></s>
+    <s xml:lang="eo" n="0"><span xmlns="http://www.w3.org/1999/xhtml" lang="eo" xml:lang="eo">eo: <q><b title="${title}">${files}</b> dosiero.</q></span></s>
+    <s xml:lang="eo" n="1"><span xmlns="http://www.w3.org/1999/xhtml" lang="eo" xml:lang="eo">eo: <q><b title="${title}">${files}</b> dosieroj.</q></span></s>
+    <s xml:lang="fr" n="0"><span xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">fr: <q><b title="${title}">${files}</b> fichier.</q></span></s>
+    <s xml:lang="fr" n="1"><span xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">fr: <q><b title="${title}">${files}</b> fichiers.</q></span></s>
+    <s xml:lang="ja" n="0"><span xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">ja: <q><b title="${title}">${files}</b> ファイル。</q></span></s>
+    <s xml:lang="pl" n="0"><span xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl">pl: <q><b title="${title}">${files}</b> plik.</q></span></s>
+    <s xml:lang="pl" n="1"><span xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl">pl: <q><b title="${title}">${files}</b> pliki.</q></span></s>
+    <s xml:lang="pl" n="2"><span xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl">pl: <q><b title="${title}">${files}</b> plików.</q></span></s>
+  </string>
+</strings>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:s="https://genesismachina.ca/xmlns/strings" targetNamespace="https://genesismachina.ca/xmlns/strings" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <!-- XML namespace (that is, the predeined xmlns:xml) import. -->
+  <!--xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="https://www.w3.org/2001/xml.xsd"/-->
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+  <xs:element name="strings">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="plural-forms" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="form" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute ref="xml:lang" use="required"/>
+            <!-- Do not allow "overriding" the default (English) plural forms. -->
+            <!--xs:assert test="@xml:lang != 'en'"/-->
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="string" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="s" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType mixed="true">
+                  <xs:sequence>
+                    <xs:any processContents="lax" minOccurs="0"/>
+                  </xs:sequence>
+                  <xs:attribute ref="xml:lang"/>
+                  <xs:attribute name="n" type="xs:unsignedByte" default="0"/>
+                  <!--
+                    Do not allow xml:lang="en", because that's the default.
+                    
+                    It would be even nicer to say xml:lang defaults to "en" if
+                    not specified. Unfortunately, that's not possible in XML
+                    Schema 1.0.
+                  -->
+                  <!--xs:assert test="@xml:lang != 'en'"/-->
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute ref="xml:id" use="required"/>
+          </xs:complexType>
+          <xs:unique name="unique-strings">
+            <xs:selector xpath="s:s"/>
+            <xs:field xpath="@xml:lang"/>
+            <xs:field xpath="@n"/>
+          </xs:unique>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+    <xs:unique name="unique-plural-forms">
+      <xs:selector xpath="s:plural-forms"/>
+      <xs:field xpath="@xml:lang"/>
+    </xs:unique>
+  </xs:element>
+</xs:schema>
